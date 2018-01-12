@@ -1,0 +1,17 @@
+Запрос:
+SELECT `t1`.`name`, COUNT(`t2`.`id`) AS `phones`
+FROM `users` AS `t1` INNER JOIN `phone_numbers` AS `t2` ON `t1`.`id`=`t2`.`user_id`
+WHERE `t1`.`gender`= 2 AND TIMESTAMPDIFF(YEAR, FROM_UNIXTIME(`t1`.`birth_date`), CURDATE()) BETWEEN 18 AND 22
+GROUP BY `t1`.`name`
+
+Оптимизиции структуры:
+- Можно изменить длину строк
+Таблица: users
+	id	int(11)
+    name	varchar(32)
+    gender	tinyint(4)
+    birth_date	int(11)
+
+-Также можно добавить INDEX.
+ALTER TABLE phone_numbers ADD INDEX `user_id` (`user_id`);
+
