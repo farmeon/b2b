@@ -1,38 +1,33 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: dimon
+ * UserController: dimon
  * Date: 12.01.2018
  * Time: 17:15
  */
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/vendor/composer/autoload_psr4.php';
 
+$user1 = ['name' => 'Ivan', 'text' => 'text Ivan'];
+$user2 = ['name' => 'Vasya', 'text' => 'text Vasya'];
 
-$user1 = new \b2b\task3\classes\User('Ivan');
-$user2 = new \b2b\task3\classes\User('Vasya');
-
-$post1 = new \b2b\task3\classes\Post('text Ivan');
-$post2 = new \b2b\task3\classes\Post('text Vasya');
-
-$modelPost = new \b2b\task3\models\PostModel();
+$userController = new \b2b\task3\src\controllers\UserController();
+$postController = new \b2b\task3\src\controllers\PostController();
 
 //Добавление поста
-$post1->setAuthor($user1);
-$post2->setAuthor($user2);
-$modelPost->addPost($post1);
-$modelPost->addPost($post2);
+$postController->addPost($userController->getByName($user1['name']), $user1['text']);
+$postController->addPost($userController->getByName($user2['name']), $user2['text']);
 
 //Получение автора статьи
-$post1->getAuthor();
-$post2->getAuthor();
+$postController->getAuthor($userController->getByName($user1['name'])->getId());
+$postController->getAuthor($userController->getByName($user1['name'])->getId());
 
 //Получение всех статей автора
-$getPostsAuthor = $modelPost->findByAuthor($user1);
-foreach ($getPostsAuthor as $item){
-    var_dump($item);
+$getPostsAuthor = $postController->findByAuthor($userController->getByName($user1['name'])->getId());
+foreach ($getPostsAuthor as $item1){
+    var_dump($item1);
 }
 
 //Замена автора статьи
-$post1->setAuthor($user2);
-$modelPost->addPost($post1);
+$updateArray = array($user2[0]);
+$postController->update($userController->getByName($user1['name'])->getId(), $updateArray);

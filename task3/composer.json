@@ -1,9 +1,9 @@
 {
   "autoload": {
     "psr-4": {
-      "b2b\\task3\\classes\\": "classes/",
-      "b2b\\task3\\models": "models/",
-      "b2b\\task3\\int": "int/"
+      "b2b\\task3": "src/",
+      "b2b\\task3:": "src/",
+      "b2b\\task3": "src/"
     }
   }
 }

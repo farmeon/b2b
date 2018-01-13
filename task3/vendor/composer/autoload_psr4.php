@@ -6,7 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'b2b\\task3\\models' => array($baseDir . '/models'),
-    'b2b\\task3\\int' => array($baseDir . '/int'),
-    'b2b\\task3\\classes\\' => array($baseDir . '/classes'),
+    'b2b\\task3:' => array($baseDir . '/src'),
 );
